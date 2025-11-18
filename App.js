@@ -1,66 +1,57 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, SectionList, Button } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    SectionList,
+    TouchableOpacity
+} from 'react-native';
 
 export default function App() {
-    const sections = [
+    const animeSections = [
         {
-            title: '🔥 FIRE',
-            color: '#ff9c7a',
-            icon: '🔥',
+            title: '🔥 Seven Deadly Sins',
+            color: '#ffefd5',
             data: [
-                {
-                    name: 'Arcanine',
-                    image: 'https://dz3we2x72f7ol.cloudfront.net/expansions/scarlet-violet/en-us/SV01_EN_224-2x.png'
-                },
-                {
-                    name: 'Elscue',
-                    image: 'https://dz3we2x72f7ol.cloudfront.net/expansions/obsidian-flames/en-us/SV03_EN_42-2x.png'
-                }
+                { name: 'Escanor', image: require('./img/Escanor.jpg') },
+                { name: 'Meliodas', image: require('./img/Meliodas.jpg') }
             ]
         },
         {
-            title: '⚡ ELECTRIC',
-            color: '#fff16b',
-            icon: '⚡',
+            title: '💥 My Hero Academia',
+            color: '#d1f0ff',
             data: [
-                {
-                    name: 'Pikachu',
-                    image: 'https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/en-us/SV08_EN_247-2x.png'
-                },
-                {
-                    name: 'Tyranitar',
-                    image: 'https://dz3we2x72f7ol.cloudfront.net/expansions/obsidian-flames/en-us/SV03_EN_211-2x.png'
-                }
+                { name: 'All Might', image: require('./img/All Might.jpg') },
+                { name: 'Endeavor', image: require('./img/Endeavor.jpg') }
+            ]
+        },
+        {
+            title: '💫 JoJo’s Bizarre Adventure',
+            color: '#f0d1ff',
+            data: [
+                { name: 'Jotaro', image: require('./img/Jotaro & Star platinum.jpg') },
+                { name: 'Joseph', image: require('./img/Joseph Joestar 《JoJo Wallpaper》.jpg') }
             ]
         }
     ];
 
     return (
         <View style={styles.container}>
-            {/* A) ADD BUTTON */}
-            <View style={styles.addButton}>
-                <Button title="ADD POKEMON" onPress={() => {}} />
-            </View>
+            <Text style={styles.title}>Anime List</Text>
 
-            {/* LIST */}
             <SectionList
-                sections={sections}
+                sections={animeSections}
                 keyExtractor={(item, index) => item.name + index}
                 renderSectionHeader={({ section }) => (
                     <View style={[styles.header, { backgroundColor: section.color }]}>
-                        <Text style={styles.headerText}>{section.icon} {section.title}</Text>
+                        <Text style={[styles.headerText, { color: '#ff4500' }]}>{section.title}</Text>
                     </View>
                 )}
                 renderItem={({ item }) => (
-                    <TouchableOpacity>
-                        <View style={styles.cardRow}>
-                            <Text style={styles.name}>{item.name}</Text>
-
-                            <Image
-                                source={{ uri: item.image }}
-                                style={styles.cardImage}
-                            />
-                        </View>
+                    <TouchableOpacity style={[styles.itemRow, { backgroundColor: '#fff0f5' }]}>
+                        <Text style={[styles.itemName, { color: '#4b0082' }]}>{item.name}</Text>
+                        <Image source={item.image} style={styles.itemImage} />
                     </TouchableOpacity>
                 )}
             />
@@ -71,36 +62,50 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#eee',
-        paddingTop: 40,
+        paddingTop: 50,
+        backgroundColor: '#f0f8ff'
     },
-    addButton: {
-        padding: 10,
+    title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        marginBottom: 15,
+        color: '#ff69b4'
     },
     header: {
-        padding: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: 12,
+        borderRadius: 10,
+        marginHorizontal: 10,
+        marginBottom: 5
     },
     headerText: {
-        fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
+        fontWeight: 'bold'
     },
-    cardRow: {
+    itemRow: {
         flexDirection: 'row',
         padding: 15,
-        backgroundColor: '#dcd6f7',
-        marginBottom: 2,
+        marginBottom: 8,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        borderRadius: 12,
+        marginHorizontal: 10,
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowOffset: { width: 0, height: 3 },
+        shadowRadius: 5,
+        elevation: 5
     },
-    name: {
+    itemName: {
         fontSize: 18,
-        fontWeight: '600',
+        fontWeight: '700'
     },
-    cardImage: {
+    itemImage: {
         width: 110,
         height: 160,
-        resizeMode: 'contain'
+        resizeMode: 'cover',
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#ff69b4'
     }
 });
