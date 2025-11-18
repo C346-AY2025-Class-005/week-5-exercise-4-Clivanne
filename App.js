@@ -39,7 +39,7 @@ export default function App() {
         <View style={styles.container}>
             {/* A) ADD BUTTON */}
             <View style={styles.addButton}>
-                <Button title="Pokedex" onPress={() => {}} />
+                <Button title="ADD POKEMON" onPress={() => {}} />
             </View>
 
             {/* LIST */}
